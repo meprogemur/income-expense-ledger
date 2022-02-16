@@ -6,6 +6,7 @@ from income.models import Income
 from expense.models import Expense
 from django.core.paginator import Paginator
 from wallet.models import Wallet
+from django.db.models import Sum
 
 
 @login_required(login_url='login')
@@ -19,6 +20,7 @@ def statement(request):
     pageno = request.GET.get('pageno')
     transacobj = Paginator.get_page(transacpage, pageno)
     wallet = Wallet.objects.all()
-
-    context = {'un': transacobj, 'source': wallet}
+    total = wallet.aggregate(Sum('balance'))
+    context = {'un': transacobj, 'source': wallet,
+               'total': total['balance__sum']}
     return render(request, 'statement/statement.html', context)

@@ -22,7 +22,8 @@
 
     <div class="col-md-2">
       <a href="{% url 'income' %}" class="btn btn-primary">BACK</a>
-    </div>
+    </div class="justify-content-end">
+
 
   </div>
 
@@ -53,9 +54,13 @@
  </div>
 </div>
 <script>
+var type = ['bar', 'doughnut', 'pie', 'line', 'radar', 'polarArea'];
+type.random = function() {
+    return this[Math.floor(Math.random()*this.length)];
+};
 const ctx = document.getElementById('mynewChart').getContext('2d');
 const myChart = new Chart(ctx, {
-    type: '{{type}}',
+    type: type.random(),
     data: {
         labels: [{% for item in labels %}
          '{{ item }}',
