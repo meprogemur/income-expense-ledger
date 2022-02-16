@@ -1,0 +1,56 @@
+    <div class="table-responsive">
+      <table class="table table-hover table-borderless table-striped table-sm">
+        <thead class="thead-dark">
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Date</th>
+              <th scope="col">Category</th>
+              <th scope="col">Wallet</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for obj in un %}
+             {% if obj.type == 'expense' %}
+            <tr class="">
+              <td>{{obj.description}}</td>
+              <td>{{obj.amount}}</td>
+              <td>{{obj.date}}</td>
+              <td>{{obj.category}}</td>
+              <td>{{obj.wallet}}</td>
+              <td><a href="{% url 'okok' obj.id %}" class="btn btn-outline-primary btn-sm">edit</a></td>
+              <td style="background-color:#EA6C6C"><td>
+            </tr>
+          {% else %}
+            <tr class="">
+              <td>{{obj.description}}</td>
+              <td>{{obj.amount}}</td>
+              <td>{{obj.date}}</td>
+              <td>{{obj.category}}</td>
+              <td>{{obj.wallet}}</td>
+              <td><a href="{% url 'editincome' obj.id %}" class="btn btn-outline-primary btn-sm">edit</a></td>
+              <td style="background-color:#60ED81"><td>
+            </tr>
+          
+          {% endif %}
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+            <div class="pagination-container">
+      <div>
+        Showing pages {{un.number}} of {{un.paginator.num_pages}}
+      </div>
+ <ul class="pagination justify-content-end">
+      {% if un.has_previous %}
+      <li {% if un.number == 1 %} class="page-item active" {% endif %}><a class="page-link" href="?pageno=1">&laquo; 1</a></li>
+      <li class="page-item"> <a class="page-link" href="?pageno={{ un.previous_page_number }}">Previous</a></li>
+      {% endif %}
+
+      {% if un.has_next %}
+      <li class="page-item"> <a class="page-link" href="?pageno={{ un.next_page_number }}">Next</a></li>
+      <li class="page-item"> <a class="page-link" href="?pageno={{ un.paginator.num_pages }}">{{ in.paginator.num_pages}} &raquo;</a></li>
+      {% endif %}
+      </ul>
+  </div>

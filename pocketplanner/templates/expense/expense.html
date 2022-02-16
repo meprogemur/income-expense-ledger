@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1> Expense </h1>
+{% include 'includes/main.html' %}
+  <a class="btn btn-primary btn-sm" href="{% url 'addexpense' %}" role="button">Add Expense</a>
+    {% if source %}
+<div class="table-responsive">
+  <h2>Source</h2>
+      <table class="table table-hover table-borderless table-striped table-sm">
+        <thead class="thead-dark">
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for obj in source %}
+            <tr class="">
+              <td>{{obj.category}}</td>
+              <td>{{obj.date}}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% endif %}
+  <a class="btn btn-primary btn-sm" href="{% url 'addcategory' %}" role="button">Add Category</a>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+ {% comment %} <div class="position-absolute top-50 start-100 translate-middle"> {% endcomment %}
+     
+    <h2> Statement </h2>
+  {% include 'includes/main.html' %}
+  <a class="btn btn-primary btn-sm" href="{% url 'addincome' %}" role="button">Add Income</a>
+  <a class="btn btn-primary btn-sm" href="{% url 'addexpense' %}" role="button">Add Expense</a>
+  {% if messages %}
+  {% for msg in messages %}
+  {{msg}}
+  {% endfor %}
+  {% endif %}
+{% if source %}
+<div class="table-responsive">
+  <h2>Wallet</h2>
+      <table class="table table-hover table-borderless table-striped table-sm">
+        <thead class="thead-dark">
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Balance</th>
+              <th scope="col">UpdatedAt</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for obj in source %}
+            <tr class="">
+              <td>{{obj.name}}</td>
+              <td>{{obj.balance}}</td>
+              <td>{{obj.updated_at}}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% endif %}
+  <a class="btn btn-primary btn-sm" href="{% url 'addwallet' %}" role="button">Add Wallet</a>
+{% endblock %}

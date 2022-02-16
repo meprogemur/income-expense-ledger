@@ -1,0 +1,23 @@
+{% extends 'base_auth.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class='card'>
+
+<div class='card-body'>
+<form method='POST' nonvalidate>
+    {% csrf_token %}
+    {{form|crispy}}
+    {% if messages  %}
+    {% for msg in messages %}
+    <p style="color:red">{{msg}}</p>
+    {% endfor %}
+    {% endif %}
+<button type="submit" class="btn btn-outline-primary">SignUp</button>
+</form>
+    Already have an account? <a href="{% url 'login' %}">LogIn</a>
+</div>
+
+</div>
+
+{% endblock %}
