@@ -4,6 +4,8 @@
  {% comment %} <div class="position-absolute top-50 start-100 translate-middle"> {% endcomment %}
      
     <h2> Statement </h2>
+    <a class="btn btn-warning" href="{% url 'exportexcel' %}" role="button">EXCEL</a>
+    <a class="btn btn-warning" href="{% url 'exportcsv' %}" role="button">CSV</a>
   {% include 'includes/main.html' %}
   <a class="btn btn-primary btn-sm" href="{% url 'addincome' %}" role="button">Add Income</a>
   <a class="btn btn-primary btn-sm" href="{% url 'addexpense' %}" role="button">Add Expense</a>
@@ -33,7 +35,7 @@
           {% endfor %}
           <tr>
             <td>Total</td>
-            <td>{{total}}</td>
+            <td>{{totalbal}}</td>
           </tr>
           </tbody>
         </table>

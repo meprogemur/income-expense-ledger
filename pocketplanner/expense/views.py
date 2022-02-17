@@ -11,15 +11,16 @@ from income.models import Income, Source
 from django.db.models import Sum
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.utils import timezone
 
 
 def expenseView(request):
     expense = Expense.objects.all()
+    total = expense.aggregate(Sum('amount'))
     category = Category.objects.all()
     context = {
         'un': expense,
-        'source': category}
+        'source': category,
+        'total': total['amount__sum']}
     return render(request, 'expense/expense.html', context)
 
 

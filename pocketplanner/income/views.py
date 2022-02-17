@@ -16,10 +16,12 @@ from django.http import JsonResponse, HttpResponse
 
 def incomeView(request):
     income = Income.objects.all()
+    total = income.aggregate(Sum('amount'))
     source = Source.objects.all()
     context = {
         'un': income,
-        'source': source}
+        'source': source,
+        'total': total['amount__sum']}
     return render(request, 'income/income.html', context)
 
 
